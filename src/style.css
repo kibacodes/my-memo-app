@@ -1,0 +1,72 @@
+body {
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.login-section {
+  margin-bottom: 20px;
+}
+
+.login-section input {
+  padding: 8px;
+  font-size: 14px;
+  margin-right: 8px;
+  width: 300px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 14px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.category-item {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  background: #fff;
+}
+
+.category-title {
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.memo-item {
+  padding-left: 20px;
+  cursor: pointer;
+  margin: 4px 0;
+}
+
+.memo-editor {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.memo-editor input,
+.memo-editor textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.memo-editor textarea {
+  height: 100px;
+  resize: vertical;
+}

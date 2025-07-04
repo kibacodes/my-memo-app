@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# 🔐 Login & Token Handling
+On load, a UUIDv4 token is generated and inserted into the login input.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Token validity is checked via regex.
 
-## Available Scripts
+On clicking the LOGIN button:
 
-In the project directory, you can run:
+A request is sent to GET /category
 
-### `npm start`
+The response populates the list of categories.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# 📁 Category Behavior
+Clicking a category title toggles its expansion.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+On expansion:
 
-### `npm test`
+Sends a request to GET /memo?category_id=
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Memo items (#memo-<id>) are rendered as direct children of the category container (#category-<id>).
 
-### `npm run build`
+Only one category is expanded at a time.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 📝 Memo Actions
+1. Add Memo (+ NEW)
+Enabled only when a category is expanded.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sends POST /memo with dummy title/content.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+New memo is:
 
-### `npm run eject`
+Inserted into the memo list.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Immediately selected for editing.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Edit Memo
+Selecting a memo:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Sends GET /memo/{id}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Populates #memo-title and #memo-content inputs.
 
-## Learn More
+Editing fields and clicking SAVE sends PUT /memo/{id} with updates.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Delete Memo
+Clicking DELETE sends DELETE /memo/{id}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Removes memo from UI and clears the form.
 
-### Code Splitting
+# 🧼 UX Safeguards
+Inputs/buttons are disabled when no memo is selected.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Memo elements are only rendered when visible (no hidden DOM elements).
